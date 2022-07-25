@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/greet-style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <h1>Greeting</h1>
+            <p class="error-message"></p>
+            <div class="message">
+                <span class="name">Name</span>
+
+                <form action="/greetings" method="POST">
+                    <input type="text" name="name" class="inputName" placeholder="enter the name">
+                    <span class="counter">0</span>
+            </div>
+            <div class="language-container">
+                <div class=language>
+                    <h2>English</h2>
+                    <input type="radio" name="language" class="radio-input" value="english">
+                </div>
+
+                <div class=language>
+                    <h2>Isixhosa</h2>
+                    <input type="radio" name="language" class="radio-input" value="isixhosa">
+                </div>
+
+                <div class=language>
+                    <h2>sesotho</h2>
+                    <input type="radio" name="language" class="radio-input" value="sesotho">
+                </div>
+            </div>
+            <div class="showElement">
+                {{GreetAll}}
+            </div>
+
+            <div>
+                <button type="submit" class="button">Greet Me</button>
+                <div class="clear">Clear</div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
