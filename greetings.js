@@ -2,7 +2,6 @@ module.exports = function Greet() {
   let name = ''
   let language = ''
   let Number = []
-  const namesGreeted = {}
 
   function setName(par) {
     if (par == "") {
@@ -11,37 +10,33 @@ module.exports = function Greet() {
       return name = par
     }
   }
+  function setLanguage(lang) {
+    language = lang
+  }
+
   function getName() {
-    return name
+    return !language && language === undefined ? name = '' : name
   }
 
-  function setLanguage(sppeak) {
-    language = sppeak
+
+  function getLanguage() {
+    if (language == "english") 
+    {
+      return !name && name === undefined ? language = '' : language = "Hey"
+    } else
+
+      if (language == "isixhosa") {
+
+        return !name && name === undefined ? language = '' : language = "Molo"
+      } else
+
+        if (language == "sesotho") {
+z
+          return !name && name === undefined ? language = '' : language = "Dumela"
+        }
+       
   }
 
-  function getLanguage(name,language) {
-
-    if(namesGreeted[name]===undefined){
-      namesGreeted[name] = 1
-    }
-    else {
-      namesGreeted [name]++
-    }
-
-    if (language == "english") {
-      return language = "Hey"
-    }
-    else if (language == "isixhosa") {
-      return language = "Molo"
-    }
-    else if (language == "sesotho") {
-      return language = "Dumela"
-    }
-
-  }
- function objectnames(){
-   return namesGreeted
- }
   function setN() {
     if (Number == "") {
       return name = " enter name"
@@ -52,13 +47,13 @@ module.exports = function Greet() {
   }
 
 
-  function counter (){
-    return Object.keys(namesGreeted).length
-  }
+  // if ((name) ==='string' && name) {
+  //   return `Hello, ${name}`;
+  // } else {
+  //   return "enter name"
+  // }
 
   return {
-    objectnames,
-    counter,
     setName,
     getName,
     setLanguage,
@@ -78,10 +73,10 @@ function Greet() {
   function getName() {
     return findName;
   }
-
+     
   function storedName() {
-
-
+    
+       
   }
   function errorMessage(name, language) {
     if (!name && !language == null)
