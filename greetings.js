@@ -2,6 +2,7 @@ module.exports = function Greet() {
   let name = ''
   let language = ''
   let Number = []
+  const namesGreeted = {}
 
   function setName(par) {
     if (par == "") {
@@ -18,24 +19,29 @@ module.exports = function Greet() {
     language = sppeak
   }
 
-  function getLanguage() {
-    if (language == "english") 
-    {
+  function getLanguage(name,language) {
+
+    if(namesGreeted[name]===undefined){
+      namesGreeted[name] = 1
+    }
+    else {
+      namesGreeted [name]++
+    }
+
+    if (language == "english") {
       return language = "Hey"
-    } else
+    }
+    else if (language == "isixhosa") {
+      return language = "Molo"
+    }
+    else if (language == "sesotho") {
+      return language = "Dumela"
+    }
 
-      if (language == "isixhosa") {
-
-        return language = "Molo"
-      } else
-
-        if (language == "sesotho") {
-
-          return language = "Dumela"
-        }
-       
   }
-
+ function objectnames(){
+   return namesGreeted
+ }
   function setN() {
     if (Number == "") {
       return name = " enter name"
@@ -46,13 +52,13 @@ module.exports = function Greet() {
   }
 
 
-  // if ((name) ==='string' && name) {
-  //   return `Hello, ${name}`;
-  // } else {
-  //   return "enter name"
-  // }
+  function counter (){
+    return Object.keys(namesGreeted).length
+  }
 
   return {
+    objectnames,
+    counter,
     setName,
     getName,
     setLanguage,
@@ -72,9 +78,10 @@ function Greet() {
   function getName() {
     return findName;
   }
-     
+
   function storedName() {
-       
+
+
   }
   function errorMessage(name, language) {
     if (!name && !language == null)
