@@ -17,9 +17,9 @@
             <div class="message">
                 <span class="name">Name</span>
 
-                <form action="/" method="POST">
+                <form action="/greet" method="POST">
                     <input type="text" name="name" class="inputName" placeholder="enter the name">
-                    <span class="counter">0</span>
+                    <span class="counter">{{counter}}</span>
             </div>
             <div class="language-container">
                 <div class=language>
@@ -49,9 +49,12 @@
 
             <div>
                 <button type="submit" class="button">Greet Me</button>
-                <div class="clear">Clear</div>
-                </form>
+                <a href="/clear">
+                    <div class="clear">Clear</div>
+                </a>
             </div>
+            </form>
+            <br <a href="/greeted"><button type="submit" class="button1">Greeted Names</button></a>
         </div>
 
     </div>

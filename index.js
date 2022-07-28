@@ -26,62 +26,64 @@ app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
   res.render("index", {
-    // GreetAll: greetings.getLanguage() + " " + greetings.getName()
+    
   })
 });
 
 
-app.post("/", function (req, res) {
-  res.render("index", {
-    name: greetings.setName(req.body.name),
-    radio: greetings.setLanguage(req.body.language),
-    // counter: greetings.getN(),
-    GreetAll: greetings.getLanguage() + " " + greetings.getName()
-  })
-});
+app.post("/greet", function (req, res) {
+  let name = req.body.name
+  let language = req.body.language
 
+  if (!name || !language) {
+    let GreetAll = greetings.errorMessage(name, language)
 
-app.post("/greetings", function (req, res) {
-  var names = req.body.name;
-  var radio = req.body.language;
+    res.render("index", {
+      GreetAll
+    })
 
-  greetings.setName(names);
-  greetings.setLanguage(radio);
-  greetings.getN();
+  } else {
 
-  if (!names && !radio) {
-    req.flash('info', greetings.errorMessage(names, radio));
+    let GreetAll = greetings.getLanguage(name, language)
+    let counter = greetings.countNames()
 
-  };
-  if (!radio) {
-    req.flash('info', 'Please select language!');
-
-  };
-  if (!names) {
-    req.flash('info', 'Please enter your name!');
-  };
-  res.redirect('/')
-});
-app.get("/counter/:names", function (req, res) {
-  let op = res.params.name
-  let bob = greetings.objectname()
-  for (names in bob) {
-    if (names === op) {
-      let Number = bob[names]
-      let text = `Hello ${op} your name has been already greeted ${number} times`
-
-    }
+    res.render("index", {
+      GreetAll, counter
+    })
   }
-  res.render('counter', {
-    text
-  });
 });
+
+
 app.get("/clear", function (req, res) {
-  greetings.clearbutton()
+  greetings.clearNames()
   res.redirect('/');
 });
+ 
 
-const PORT = process.env.PORT || 3044;
+
+ app.get('/greeted', function (req,res){
+    console.log(greetings.listofNames())
+     res.render('names',{
+       keynames:greetings.listofNames()})
+ });
+
+
+app.get("/counter/:name", function (req, res){
+  let words = req.params.name
+  let person = greetings.listofNames()
+
+  for (const name in person) {
+    if (name == words) {
+      let greetedTimes = person[name]
+      let Text = `Hi ${words} you were greeted ${greetedTimes}`
+    }
+  }
+  res.render('/counter',{
+    Text
+  })
+});
+
+const PORT = process.env.PORT || 3074;
 
 app.listen(PORT, function () {
   console.log('App starting on port', PORT);

@@ -1,102 +1,90 @@
 module.exports = function Greet() {
   let name = ''
   let language = ''
-  let Number = []
+  // let Number = []
+  let Greeted = {}
 
-  function setName(par) {
-    if (par == "") {
-      return name = "enter name"
-    } else {
-      return name = par
-    }
-  }
   function setLanguage(lang) {
     language = lang
   }
+  function setName(username) {
+     name = username
+  }
 
   function getName() {
-    return !language && language === undefined ? name = '' : name
+    return name
   }
-
-
   function getLanguage() {
-    if (language == "english") 
-    {
-      return !name && name === undefined ? language = '' : language = "Hey"
-    } else
-
-      if (language == "isixhosa") {
-
-        return !name && name === undefined ? language = '' : language = "Molo"
-      } else
-
-        if (language == "sesotho") {
-z
-          return !name && name === undefined ? language = '' : language = "Dumela"
-        }
-       
+    return language
   }
 
-  function setN() {
-    if (Number == "") {
-      return name = " enter name"
+
+  function getLanguage(name, language) {
+
+    if (Greeted[name] === undefined) {
+      Greeted[name] = 1;
     }
-  }
-  function getN() {
-    return name.length
-  }
+    else {
+      Greeted[name]++
+    }
+
+    if (language === 'english') {
+      return 'Hello, ' + name
+    }
+    if (language === 'isixhosa') {
+      return 'Mholo, ' + name
+    }
+
+    if (language === 'sesotho') {
+      return 'Dumela, ' + name
+    }
 
 
-  // if ((name) ==='string' && name) {
-  //   return `Hello, ${name}`;
-  // } else {
-  //   return "enter name"
-  // }
+
+  }
+
+  function errorMessage(name, language) {
+
+
+
+    if (!language && !name) {
+
+      return "Please enter your name and language"
+    }
+
+    else if (!name) {
+      return "Please enter your name"
+
+    }
+
+    else if (!language) {
+      return "Please select a language"
+    }
+
+
+  }
+  function clearNames(){
+    Greeted = {}
+  }
+
+  function countNames(){
+    return Object.keys(Greeted).length
+    
+  }
+  function listofNames(){
+   return Greeted
+  }
 
   return {
-    setName,
+    listofNames,
+    clearNames,
+    errorMessage,
     getName,
     setLanguage,
     getLanguage,
-    setN,
-    getN
-
-  }
-}
-
-//the other factory fuction// 
-function Greet() {
-  let name = ''
-  function setName(username) {
-    name = username
-  }
-  function getName() {
-    return findName;
-  }
-     
-  function storedName() {
-    
-       
-  }
-  function errorMessage(name, language) {
-    if (!name && !language == null)
-      return errorMessage('Please enter your name and language!');
-  }
-
-  function errorMessage(language) {
-    if (!language == null)
-      return errorMessage('Please select language!');
-  }
-  function errorMessage(name) {
-    if (!name)
-      return errorMessage('Please enter your name!');
-  }
-  return {
     setName,
     getName,
-    storedName,
-    errorMessage
+    countNames,
+
   }
 }
-
-// export default Greet

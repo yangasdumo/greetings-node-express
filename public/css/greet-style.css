@@ -47,7 +47,7 @@ h3{
 	background-color:antiquewhite;
 	border-radius: 1em;	
 }
-.button, .clear {
+.button, .clear,.button1 {
 	cursor: pointer;
 	font-size: 20px;
 	border: .2px solid green;
