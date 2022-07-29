@@ -7,8 +7,6 @@ const greetings = require('./greetings.js')([]);
 
 const app = express();
 
-// const greeting = greetings();
-
 app.use(session({
   secret: "<add a secret string here>",
   resave: false,
@@ -36,10 +34,10 @@ app.post("/greet", function (req, res) {
   let language = req.body.language
 
   if (!name || !language) {
-    let GreetAll = greetings.errorMessage(name, language)
-
+    let error = greetings.errorMessage(name, language)
+    
     res.render("index", {
-      GreetAll
+      error
     })
 
   } else {
@@ -58,29 +56,32 @@ app.get("/clear", function (req, res) {
   greetings.clearNames()
   res.redirect('/');
 });
- 
 
 
- app.get('/greeted', function (req,res){
-    console.log(greetings.listofNames())
-     res.render('names',{
-       keynames:greetings.listofNames()})
- });
+
+app.get('/greeted', function (req, res) {
+  
+  res.render('names', {
+    keynames: greetings.listofNames()
+  })
+});
 
 
-app.get("/counter/:name", function (req, res){
+app.get("/counter/:name", function (req, res) {
   let words = req.params.name
   let person = greetings.listofNames()
-
+  var Text = ""
   for (const name in person) {
     if (name == words) {
       let greetedTimes = person[name]
-      let Text = `Hi ${words} you were greeted ${greetedTimes}`
+      Text = `Hi ${words} Your Name Has Been Greeted ${greetedTimes}`
     }
   }
-  res.render('/counter',{
+  console.log(Text)
+  res.render('counter', {
     Text
-  })
+  });
+
 });
 
 const PORT = process.env.PORT || 3074;

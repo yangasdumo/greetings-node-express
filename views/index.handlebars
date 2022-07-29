@@ -13,7 +13,7 @@
     <div class="container">
         <div class="wrapper">
             <h1>Greeting</h1>
-            <p class="error-message"></p>
+            <p class="error-message">{{error}}</p>
             <div class="message">
                 <span class="name">Name</span>
 
@@ -44,8 +44,14 @@
                     <h1> {{messages.info}}</h1>
                 </div>
                 {{/if}}
-
             </div>
+            {{!-- <div>
+             {{#if messages.info}}
+                <div class="error-message" id="error">
+                    <h1> {{messages.info}}</h1>
+                </div>
+                {{/if}}
+            </div> --}}
 
             <div>
                 <button type="submit" class="button">Greet Me</button>

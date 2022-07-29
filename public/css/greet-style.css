@@ -35,7 +35,7 @@ h3{
     font-size: 90%;
 	margin: 1em auto;
 	padding: 1em;
-	background-color:rgba(83, 83, 83, 0.511);
+	background-color:rgba(62, 17, 17, 0.511);
 	border-radius: 1em;	
 }
 
@@ -64,6 +64,7 @@ h3{
 	color:red;
 
 }
+
 .name{
 	font-size: 18px;
 }
