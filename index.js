@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
   res.render("index", {
-    
+
   })
 });
 
@@ -35,7 +35,7 @@ app.post("/greet", function (req, res) {
 
   if (!name || !language) {
     let error = greetings.errorMessage(name, language)
-    
+
     res.render("index", {
       error
     })
@@ -60,7 +60,7 @@ app.get("/clear", function (req, res) {
 
 
 app.get('/greeted', function (req, res) {
-  
+
   res.render('names', {
     keynames: greetings.listofNames()
   })
@@ -74,7 +74,7 @@ app.get("/counter/:name", function (req, res) {
   for (const name in person) {
     if (name == words) {
       let greetedTimes = person[name]
-      Text = `Hi ${words} Your Name Has Been Greeted ${greetedTimes}`
+      Text = `Hi ${words} Your Name Has Been Greeted!! ${greetedTimes}`
     }
   }
   console.log(Text)

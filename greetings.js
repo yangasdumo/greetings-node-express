@@ -1,7 +1,6 @@
 module.exports = function Greet() {
   let name = ''
   let language = ''
-  // let Number = []
   let Greeted = {}
 
   function setLanguage(lang) {
@@ -44,7 +43,7 @@ module.exports = function Greet() {
   }
 
   function errorMessage(name, language) {
-    
+
     if (!language && !name) {
 
       return "Please enter your name and language"
@@ -58,15 +57,8 @@ module.exports = function Greet() {
     else if (!language) {
       return "Please select a language"
     }
-    
-  }
-  
-//  function zompo(){
-//      if(errorMessage(name, language)){
-//       return 'error-message'
-//      }
-//  }
 
+  }
 
   function clearNames() {
     Greeted = {}
@@ -90,7 +82,7 @@ module.exports = function Greet() {
     setName,
     getName,
     countNames,
-  
+
 
   }
 }
