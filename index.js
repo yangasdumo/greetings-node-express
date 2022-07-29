@@ -48,13 +48,17 @@ app.post("/greet", function (req, res) {
     res.render("index", {
       GreetAll, counter
     })
+    
   }
 });
 
 
 app.get("/clear", function (req, res) {
+  let GreetAll = greetings.resetButton()
   greetings.clearNames()
-  res.redirect('/');
+  res.render('index',{
+    GreetAll
+  });
 });
 
 

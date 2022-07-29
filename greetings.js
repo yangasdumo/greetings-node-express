@@ -72,7 +72,13 @@ module.exports = function Greet() {
     return Greeted
   }
 
+  function resetButton(){
+    return "Your Data has been cleared!"
+
+  }
+
   return {
+    resetButton,
     listofNames,
     clearNames,
     errorMessage,
