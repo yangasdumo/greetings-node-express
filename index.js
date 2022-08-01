@@ -1,9 +1,10 @@
 const express = require('express');
-const flash = require('express-flash')
-const session = require('express-session')
+const flash = require('express-flash');
+const session = require('express-session');
 const exphbs = require("express-handlebars");
 const bodyParser = require('body-parser');
 const greetings = require('./greetings.js')([]);
+
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.use(bodyParser.json());
 app.get("/", function (req, res) {
   res.render("index", {
 
-  })
+  });
 });
 
 

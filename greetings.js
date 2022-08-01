@@ -37,9 +37,6 @@ module.exports = function Greet() {
     if (language === 'sesotho') {
       return 'Dumela, ' + name
     }
-
-
-
   }
 
   function errorMessage(name, language) {
@@ -72,7 +69,7 @@ module.exports = function Greet() {
     return Greeted
   }
 
-  function resetButton(){
+  function resetButton() {
     return "Your Data has been cleared!"
 
   }
