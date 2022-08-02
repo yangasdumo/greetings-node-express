@@ -1,18 +1,25 @@
 const assert = require('assert');
-const fun = require('../greetings');
+const Greet = require('../greetings');
 
 
 describe('TEST MY GREET FUNCTION', function(){
 
     it('should return error message when name is empty', function(){
-       const greet = Greet()
-        greet.setName('')
-        assert.equal("enter name", greet.getName());
+        let greetings = Greet()
+        let  name = errorMessage()
+        let language = errorMessage()
 
+        const greet = errorMessage(name, language)
+        greet.setName()
+        assert.equal("enter name");
+      
     });
 
     it('should return when you select a language', function(){
-        const greet = Greet()
+        
+        let name = getLanguage()
+        
+        const greet = getLanguage(name, language)
         greet.setLanguage()
         assert.equal("", greet.getLanguage());
 
@@ -20,12 +27,11 @@ describe('TEST MY GREET FUNCTION', function(){
 
     it('should return the number of names', function(){
         
-        const greet = Greet()
+        const greet = countNames()
         greet.setName('sdumo')
         greet.setName('young')
         greet.setName('zoe')
-
-        assert.equal("3", greet.getN());
+        assert.equal("3", greet.countNames());
 
     });
 

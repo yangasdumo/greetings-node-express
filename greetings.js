@@ -1,7 +1,7 @@
 module.exports = function Greet() {
   let name = ''
   let language = ''
-  let Greeted = {}
+  let greeted = {}
 
   function setLanguage(lang) {
     language = lang
@@ -20,11 +20,11 @@ module.exports = function Greet() {
 
   function getLanguage(name, language) {
 
-    if (Greeted[name] === undefined) {
-      Greeted[name] = 1;
+    if (greeted[name] === undefined) {
+      greeted[name] = 1;
     }
     else {
-      Greeted[name]++
+      greeted[name]++
     }
 
     if (language === 'english') {
@@ -58,15 +58,15 @@ module.exports = function Greet() {
   }
 
   function clearNames() {
-    Greeted = {}
+    greeted = {}
   }
 
   function countNames() {
-    return Object.keys(Greeted).length
+    return Object.keys(greeted).length
 
   }
   function listofNames() {
-    return Greeted
+    return greeted
   }
 
   function resetButton() {
