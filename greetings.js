@@ -18,8 +18,8 @@ module.exports = function Greet() {
   }
 
 
-  function getLanguage(name, language) {
-
+  function getLanguage(name,language) {
+        
     if (greeted[name] === undefined) {
       greeted[name] = 1;
     }
@@ -38,11 +38,12 @@ module.exports = function Greet() {
       return 'Dumela, ' + name
     }
   }
+  
 
-  function errorMessage(name, language) {
-
+  function errorMessage(name,language) {
+     
     if (!language && !name) {
-
+        
       return "Please enter your name and language"
     }
 
@@ -54,7 +55,7 @@ module.exports = function Greet() {
     else if (!language) {
       return "Please select a language"
     }
-
+     
   }
 
   function clearNames() {
@@ -62,6 +63,7 @@ module.exports = function Greet() {
   }
 
   function countNames() {
+    
     return Object.keys(greeted).length
 
   }
