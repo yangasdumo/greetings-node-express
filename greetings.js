@@ -1,7 +1,7 @@
-module.exports = function Greet() {
+module.exports = function Greet(db) {
   let name = ''
   let language = ''
-  let greeted = {}
+  // let greeted = {}
 
   function setLanguage(lang) {
     language = lang
@@ -18,13 +18,23 @@ module.exports = function Greet() {
   }
 
 
-  function getLanguage(name,language) {
-        
-    if (greeted[name] === undefined) {
-      greeted[name] = 1;
+  async function getLanguage(names, language) {
+
+    // if (greeted[name] === undefined) {
+    //   greeted[name] = 1;
+    // }
+    // else {
+    //   greeted[name]++
+    // }
+    const name = names.charAt(0).toUpperCase() + names.slice(1).toLowerCase();
+
+    let show = await db.oneOrNone('select greeted_names from my_greet where greeted_names = $1', [name])
+
+    if (show === null) {
+      await db.none('insert into my_greet (greeted_names, counter) values ($1, $2)', [name, 1])
     }
     else {
-      greeted[name]++
+      await db.none('UPDATE my_greet SET counter = counter + 1 WHERE greeted_names = $1', [name])
     }
 
     if (language === 'english') {
@@ -38,12 +48,12 @@ module.exports = function Greet() {
       return 'Dumela, ' + name
     }
   }
-  
 
-  function errorMessage(name,language) {
-     
+
+  async function errorMessage(name, language) {
+
     if (!language && !name) {
-        
+
       return "Please enter your name and language"
     }
 
@@ -55,26 +65,34 @@ module.exports = function Greet() {
     else if (!language) {
       return "Please select a language"
     }
-     
-  }
-
-  function clearNames() {
-    greeted = {}
-  }
-
-  function countNames() {
-    
-    return Object.keys(greeted).length
 
   }
-  function listofNames() {
+
+  async function clearNames() {
+    await db.none('delete from my_greet')
+
+  }
+
+  async function countNames() {
+    let counted = await db.any('select * from my_greet');
+    return counted.length
+
+  }
+  async function listofNames() {
+    let greeted = await db.manyOrNone('select greeted_names from my_greet')
     return greeted
   }
 
-  function resetButton() {
+  async function resetButton() {
     return "Your Data has been cleared!"
 
   }
+
+  async function userCounter(name) {
+    let counter = await db.oneOrNone('select greeted_names, counter from my_greet where greeted_names=$1', [name])
+    return counter
+}
+  
 
   return {
     resetButton,
@@ -87,7 +105,7 @@ module.exports = function Greet() {
     setName,
     getName,
     countNames,
-
+    userCounter
 
   }
 }

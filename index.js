@@ -3,8 +3,17 @@ const flash = require('express-flash');
 const session = require('express-session');
 const exphbs = require("express-handlebars");
 const bodyParser = require('body-parser');
-const greetings = require('./greetings.js')([]);
 
+
+//database
+const pgp = require('pg-promise')({});
+
+const local_database_url = 'postgres://codex:codex123@localhost:5432/my_greet';
+const connectionString = process.env.DATABASE_URL || local_database_url;
+
+const db = pgp(connectionString);
+//
+const greetings = require('./greetings.js')(db);
 
 const app = express();
 
@@ -30,7 +39,7 @@ app.get("/", function (req, res) {
 });
 
 
-app.post("/greet", function (req, res) {
+app.post("/greet",async function (req, res) {
   let name = req.body.name
   let language = req.body.language
 
@@ -43,46 +52,47 @@ app.post("/greet", function (req, res) {
 
   } else {
 
-    let GreetAll = greetings.getLanguage(name, language)
-    let counter = greetings.countNames()
+    let GreetAll =await greetings.getLanguage(name, language)
+    let counter = await greetings.countNames()
 
     res.render("index", {
       GreetAll, counter
     })
-    
+
   }
 });
 
 
-app.get("/clear", function (req, res) {
-  let GreetAll = greetings.resetButton()
-  greetings.clearNames()
-  res.render('index',{
+app.get("/clear", async function (req, res) {
+  let GreetAll = await greetings.resetButton()
+  await greetings.clearNames()
+  res.render('index', {
     GreetAll
   });
 });
 
 
 
-app.get('/greeted', function (req, res) {
-
+app.get('/greeted',async function (req, res) {
   res.render('names', {
-    keynames: greetings.listofNames()
+    keynames: await greetings.listofNames()
   })
 });
 
 
-app.get("/counter/:name", function (req, res) {
+app.get("/counter/:name", async function (req, res) {
   let words = req.params.name
-  let person = greetings.listofNames()
+  let person =  await greetings.userCounter(words)
   var Text = ""
-  for (const name in person) {
-    if (name == words) {
-      let greetedTimes = person[name]
-      Text = `Hi ${words} Your Name Has Been Greeted!! ${greetedTimes}`
-    }
-  }
-  console.log(Text)
+  Text = `Hi ${words} Your Name Has Been Greeted!! ${person.counter}`
+  // for (let name of person) {
+  //   console.log(name)
+  //   if (name[greeted_names] == words) {
+  //     let greetedTimes = person[name]
+  //     Text = `Hi ${words} Your Name Has Been Greeted!! ${greetedTimes}`
+  //   }
+  // }
+  // console.log("234567",person)
   res.render('counter', {
     Text
   });
