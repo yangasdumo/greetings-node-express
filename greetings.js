@@ -3,17 +3,17 @@ module.exports = function Greet(db) {
   let language = ''
   // let greeted = {}
 
-  function setLanguage(lang) {
+  async function setLanguage(lang) {
     language = lang
   }
-  function setName(username) {
+  async function setName(username) {
     name = username
   }
 
-  function getName() {
+  async function getName() {
     return name
   }
-  function getLanguage() {
+  async function getLanguage() {
     return language
   }
 
