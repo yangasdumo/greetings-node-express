@@ -1,7 +1,8 @@
 const assert = require('assert');
 const Greet = require('../greetings');
+const pgPromise = require('pg-promise')
 
-
+const pgp = pgPromise({})
 
 
 describe("The Greeting massages", function () {

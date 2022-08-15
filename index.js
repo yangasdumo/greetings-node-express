@@ -11,7 +11,16 @@ const pgp = require('pg-promise')({});
 const local_database_url = 'postgres://codex:codex123@localhost:5432/my_greet';
 const connectionString = process.env.DATABASE_URL || local_database_url;
 
-const db = pgp(connectionString);
+const config ={
+  connectionString 
+}
+
+if(process.env.NODE_ENV == "production"){
+  config.ssl = {
+      rejectUnauthorized: false
+  }
+}
+const db = pgp(config);
 //
 const greetings = require('./greetings.js')(db);
 

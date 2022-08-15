@@ -26,7 +26,7 @@ module.exports = function Greet(db) {
     // else {
     //   greeted[name]++
     // }
-    const name = names.charAt(0).toUpperCase() + names.slice(1).toLowerCase();
+    let  name = names.charAt(0).toUpperCase() + names.slice(1).toLowerCase();
 
     let show = await db.oneOrNone('select greeted_names from my_greet where greeted_names = $1', [name])
 
