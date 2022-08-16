@@ -53,7 +53,7 @@ app.post("/greet",async function (req, res) {
   let language = req.body.language
 
   if (!name || !language) {
-    let error = greetings.errorMessage(name, language)
+    let error = await greetings.errorMessage(name, language)
 
     res.render("index", {
       error

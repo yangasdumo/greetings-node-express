@@ -59,13 +59,20 @@ describe("The Greeting massages", async function () {
 });
 describe("Please Select language massages",async function(){
 
+    beforeEach(async function(){
+        await db.manyOrNone('delete from my_greet')
+    });
+       
     it("should display (please select languge) if the name is passed and the lanuge is not passed", async function(){
-
-        
-        assert.equal("Please select a language",greetedName.errorMessage("Sdumo" ,"") )
+         let Language = ''
+        const theGreeting = await greeted.Language()
+        assert.equal("Please select a language", theGreeting)
 
     });
-   
+    after( async function(){
+        await db.manyOrNone('TRUNCATE from my_greet')
+     })
+
 });
 
 describe("The invelid massages",async function(){
@@ -73,7 +80,7 @@ describe("The invelid massages",async function(){
     it("should display (please enter a valid name) if the is no name given",async function(){
 
       
-        assert.equal("Please enter your name",greetedName.errorMessage("","english") )
+        assert.equal("Please enter your name", )
 
     });
    
@@ -83,7 +90,7 @@ describe("The invelid massages",async function(){
     it("should display (please Enter Name and language) if the is no name passed and no languge selected",async function(){
 
         
-        assert.equal("Please select a language",greetedName.errorMessage(" ","") )
+        assert.equal("Please select a language",)
 
     });
    
