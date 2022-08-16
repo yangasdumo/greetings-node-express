@@ -52,48 +52,34 @@ describe("The Greeting massages", async function () {
         assert.equal("Dumela, Sdumo",theGreeting)
 
     });
-    after( async function(){
-       await db.manyOrNone('TRUNCATE from my_greet')
-    })
 
-});
-describe("Please Select language massages",async function(){
-
-    beforeEach(async function(){
-        await db.manyOrNone('delete from my_greet')
-    });
-       
     it("should display (please select languge) if the name is passed and the lanuge is not passed", async function(){
-         let Language = ''
-        const theGreeting = await greeted.Language()
+        let theName = 'sdumo';
+        let language = ''
+        const theGreeting = await greeted.errorMessage(theName,language)
         assert.equal("Please select a language", theGreeting)
 
     });
-    after( async function(){
-        await db.manyOrNone('TRUNCATE from my_greet')
-     })
 
-});
-
-describe("The invelid massages",async function(){
-
-    it("should display (please enter a valid name) if the is no name given",async function(){
-
-      
-        assert.equal("Please enter your name", )
+    it("should display (please enter you name) if the is no name given",async function(){
+          let theName = ''
+          let  language = 'isixhosa'
+          const theGreeting = await greeted.errorMessage(theName,language)
+        assert.equal("Please enter your name",theGreeting)
 
     });
-   
-});
-describe("The invelid massages",async function(){
 
     it("should display (please Enter Name and language) if the is no name passed and no languge selected",async function(){
-
-        
-        assert.equal("Please select a language",)
-
+         let theName = ''
+         let theLanguage =''
+        const theGreeting = await greeted.errorMessage(theName,theLanguage)
+        assert.equal("Please enter your name and language",theGreeting)
     });
-   
+
+    // after( async function(){
+    //     await db.manyOrNone('TRUNCATE from my_greet')
+    //  })
+  
 });
 
 
