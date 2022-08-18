@@ -24,7 +24,7 @@ const db = pgp(config);
 describe("The Greeting massages", async function () {
 
     beforeEach(async function(){
-        await db.manyOrNone('delete from my_greet where id >= 1')
+        await db.manyOrNone('delete from my_greet where id >=1')
     });
      
     it("should display (Hello, name) if the name is entered and the selected language is english", async function () {
