@@ -18,8 +18,8 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_USER: codex
-          POSTGRES_PASSWORD: pg123
-          POSTGRES_DB: thegreet
+          POSTGRES_PASSWORD: codex123
+          POSTGRES_DB: my_greet_test
         ports:
         - 5432:5432
         # Set health checks to wait until postgres has started
@@ -33,7 +33,7 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: create postgresql tables
-      run: PGPASSWORD=pg123 psql -h localhost -U codex -d thegreet -a -f ./mydata.sql
+      run: PGPASSWORD=codex123 psql -h localhost -U codex -d my_greet_test -a -f ./greet-Database.sql
     - name: run tests with postgresql
       run:
         npm test
