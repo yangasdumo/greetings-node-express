@@ -93,15 +93,7 @@ app.get("/counter/:name", async function (req, res) {
   let words = req.params.name
   let person =  await greetings.userCounter(words)
   var Text = ""
-  Text = `Hi ${words} Your Name Has Been Greeted!! ${person.counter}`
-  // for (let name of person) {
-  //   console.log(name)
-  //   if (name[greeted_names] == words) {
-  //     let greetedTimes = person[name]
-  //     Text = `Hi ${words} Your Name Has Been Greeted!! ${greetedTimes}`
-  //   }
-  // }
-  // console.log("234567",person)
+  Text = `Hi ${words} you have been greeted ${person.counter} time(s)`
   res.render('counter', {
     Text
   });

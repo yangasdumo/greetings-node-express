@@ -5,7 +5,7 @@ const greetings = require('../greetings');
 
 const pgp = pgPromise({})
 
-const local_database_url = 'postgres://codex:codex123@localhost:5432/my_greet';
+const local_database_url = 'postgres://codex:codex123@localhost:5432/my_greet_test';
 const connectionString = process.env.DATABASE_URL || local_database_url;
 
 const config ={
@@ -76,10 +76,7 @@ describe("The Greeting massages", async function () {
         assert.equal("Please enter your name and language",theGreeting)
     });
 
-    // after( async function(){
-    //     await db.manyOrNone('TRUNCATE from my_greet')
-    //  })
-  
+    
 });
 
 
