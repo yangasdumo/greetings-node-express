@@ -8,16 +8,8 @@ const pgp = pgPromise({})
 const local_database_url = 'postgres://codex:codex123@localhost:5432/my_greet_test';
 const connectionString = process.env.DATABASE_URL || local_database_url;
 
-const config ={
-  connectionString 
-}
 
-if(process.env.NODE_ENV == "production"){
-  config.ssl = {
-      rejectUnauthorized: false
-  }
-}
-const db = pgp(config);
+const db = pgp(connectionString);
 
  const greeted = greetings(db)
 
