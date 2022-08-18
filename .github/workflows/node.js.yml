@@ -38,4 +38,4 @@ jobs:
       run:
         npm test
       env:
-        DATABASE_URL: postgresql://codex:pg123@localhost:5432/thegreet
+        DATABASE_URL: postgres://codex:codex123@localhost:5432/my_greet_test
