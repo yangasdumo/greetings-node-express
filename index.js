@@ -63,7 +63,6 @@ app.post("/greet",async function (req, res) {
 
     let GreetAll =await greetings.getLanguage(name, language)
     let counter = await greetings.countNames()
-
     res.render("index", {
       GreetAll, counter
     })
