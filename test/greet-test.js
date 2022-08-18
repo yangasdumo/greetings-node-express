@@ -6,7 +6,7 @@ const greetings = require('../greetings');
 const pgp = pgPromise({})
 
 const local_database_url = 'postgres://codex:codex123@localhost:5432/my_greet_test';
-const connectionString = process.env.DATABASE_URL || local_database_url;
+const connectionString = local_database_url;
 
 
 const db = pgp(connectionString);
