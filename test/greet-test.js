@@ -39,7 +39,6 @@ describe("The Greeting Database tests", async function () {
 
     });
      
-    
     it("Should display nothing if the is no names in the database table", async function () {
         
         assert.equal(null, await greeted.userCounter())

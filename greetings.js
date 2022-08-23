@@ -1,6 +1,6 @@
 module.exports = function Greet(db) {
   
-  var alphabets = /^[a-z A-Z]+$/;
+  let alphabets = /^[a-z A-Z]+$/;
 
   async function getLanguage(names) {
 

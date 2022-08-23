@@ -3,9 +3,9 @@ const session = require('express-session');
 const exphbs = require("express-handlebars");
 const bodyParser = require('body-parser');
 const express = require("express");
-const greet = require ('./routes')
-const Greeting = require ('./greet-functions')
-const greet1 = require ('./greetings')
+const greet = require ('./routes');
+const Greeting = require ('./greet-functions');
+const greet1 = require ('./greetings');
 
 //database
 const pgp = require('pg-promise')({});
@@ -49,7 +49,7 @@ app.get("/", Router.home);
 app.post("/greet",Router.greets);
 app.get("/clear",Router.clear)
 app.get('/greeted',Router.greeted);
-app.get("/counter/:name",Router.counter) 
+app.get("/counter/:name",Router.counter); 
 
 const PORT = process.env.PORT || 3074;
 
