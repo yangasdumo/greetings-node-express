@@ -22,7 +22,7 @@ describe("The Greeting Database tests", async function () {
     
     it("Should display nothing if the clear botton is pressed and the are > 1 names in the database", async function () {
         
-        await greeted.getLanguage("Sdumo")
+        await greeted.greet2("Sdumo")
         await greeted.clearNames()
         assert.deepEqual( [] , await greeted.listofNames() )
         
@@ -30,9 +30,9 @@ describe("The Greeting Database tests", async function () {
     
     it("Should display nothing if the clear botton is pressed and the are 4 names in the database", async function () {
 
-        await greeted.getLanguage("Sdumo")
-        await greeted.getLanguage("Young")
-        await greeted.getLanguage("TaSugar")
+        await greeted.greet2("Sdumo")
+        await greeted.greet2("Young")
+        await greeted.greet2("TaSugar")
 
         await greeted.clearNames()
         assert.deepEqual( [] ,await greeted.listofNames() )
@@ -46,7 +46,7 @@ describe("The Greeting Database tests", async function () {
     
     it("Should display name if name is the name in the database", async function () {
         
-        await greeted.getLanguage("Sdumo");
+        await greeted.greet2("Sdumo");
         assert.deepEqual([ { greeted_names: 'Sdumo' }]
         , await greeted.listofNames())
         
@@ -54,10 +54,10 @@ describe("The Greeting Database tests", async function () {
 
     it("The names counter ", async function () {
     
-        await greeted.getLanguage("Yanga");
-        await greeted.getLanguage("Aphiwe");
-        await greeted.getLanguage("Tso");
-        await greeted.getLanguage("Young");
+        await greeted.greet2("Yanga");
+        await greeted.greet2("Aphiwe");
+        await greeted.greet2("Tso");
+        await greeted.greet2("Young");
 
         assert.deepEqual( {
             counter: 1,

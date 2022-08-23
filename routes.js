@@ -19,7 +19,7 @@ module.exports = function routes(greetings,greeter) {
     } else {
 
       let GreetAll = await greeter.message(name, language);
-      await greetings.getLanguage(name)
+      await greetings.greet2(name)
       let counter = await greetings.countNames()
       res.render("index", {
         GreetAll, counter

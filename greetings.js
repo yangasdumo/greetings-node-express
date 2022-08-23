@@ -2,7 +2,7 @@ module.exports = function Greet(db) {
   
   let alphabets = /^[a-z A-Z]+$/;
 
-  async function getLanguage(names) {
+  async function greet2(names) {
 
     let name = names.charAt(0).toUpperCase() + names.slice(1).toLowerCase();
 
@@ -20,7 +20,7 @@ module.exports = function Greet(db) {
     await db.none('delete from my_greet')
 
   }
-
+    
   async function countNames(names) {
     if (alphabets.test(names) == false) {
 
@@ -50,7 +50,7 @@ module.exports = function Greet(db) {
     resetButton,
     listofNames,
     clearNames,
-    getLanguage,
+    greet2,
     countNames,
     userCounter
 
