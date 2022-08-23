@@ -1,9 +1,11 @@
-const express = require('express');
-const flash = require('express-flash');
+
 const session = require('express-session');
 const exphbs = require("express-handlebars");
 const bodyParser = require('body-parser');
-
+const express = require("express");
+const greet = require ('./routes')
+const Greeting = require ('./greet-functions')
+const greet1 = require ('./greetings')
 
 //database
 const pgp = require('pg-promise')({});
@@ -21,8 +23,10 @@ if(process.env.NODE_ENV == "production"){
   }
 }
 const db = pgp(config);
-//
-const greetings = require('./greetings.js')(db);
+
+const greeter = greet1(db);
+const greetRoot = Greeting();
+const Router = greet(greeter,greetRoot);
 
 const app = express();
 
@@ -41,63 +45,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.get("/", function (req, res) {
-  res.render("index", {
-
-  });
-});
-
-
-app.post("/greet",async function (req, res) {
-  let name = req.body.name
-  let language = req.body.language
-
-  if (!name || !language) {
-    let error = await greetings.errorMessage(name, language)
-
-    res.render("index", {
-      error
-    })
-
-  } else {
-
-    let GreetAll =await greetings.getLanguage(name, language)
-    let counter = await greetings.countNames()
-    res.render("index", {
-      GreetAll, counter
-    })
-
-  }
-});
-
-
-app.get("/clear", async function (req, res) {
-  let GreetAll = await greetings.resetButton()
-  await greetings.clearNames()
-  res.render('index', {
-    GreetAll
-  });
-});
-
-
-
-app.get('/greeted',async function (req, res) {
-  res.render('names', {
-    keynames: await greetings.listofNames()
-  })
-});
-
-
-app.get("/counter/:name", async function (req, res) {
-  let words = req.params.name
-  let person =  await greetings.userCounter(words)
-  var Text = ""
-  Text = `Hi ${words} you have been greeted ${person.counter} time(s)`
-  res.render('counter', {
-    Text
-  });
-
-});
+app.get("/", Router.home);
+app.post("/greet",Router.greets);
+app.get("/clear",Router.clear)
+app.get('/greeted',Router.greeted);
+app.get("/counter/:name",Router.counter) 
 
 const PORT = process.env.PORT || 3074;
 

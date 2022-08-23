@@ -13,62 +13,62 @@ const db = pgp(connectionString);
 
  const greeted = greetings(db)
 
-describe("The Greeting massages", async function () {
+describe("The Greeting Database tests", async function () {
 
     beforeEach(async function(){
         await db.manyOrNone('delete from my_greet where id >=1')
     });
      
-    it("should display (Hello, name) if the name is entered and the selected language is english", async function () {
-
-        
-        let theName = 'Sdumo'
-        let theLanguage = 'english'
-         const theGreeting = await greeted.getLanguage(theName,theLanguage)
-        assert.equal("Hello, Sdumo", theGreeting)
-
-    });
-    it("should display (Molo, name) if the name is entered and the language is isixhosa", async function () {
-         
-        let theName = 'Young'
-        let theLanguage = 'isixhosa'
-         const theGreeting = await greeted.getLanguage(theName,theLanguage)
-        assert.equal("Mholo, Young",theGreeting)
-
-    });
-    it("should display (Dumela, name) if the language is selected ", async function () {
-
-        let theName = 'Sdumo'
-        let theLanguage = 'sesotho'
-         const theGreeting = await greeted.getLanguage(theName,theLanguage)
-        assert.equal("Dumela, Sdumo",theGreeting)
-
-    });
-
-    it("should display (please select languge) if the name is passed and the lanuge is not passed", async function(){
-        let theName = 'sdumo';
-        let language = ''
-        const theGreeting = await greeted.errorMessage(theName,language)
-        assert.equal("Please select a language", theGreeting)
-
-    });
-
-    it("should display (please enter you name) if the is no name given",async function(){
-          let theName = ''
-          let  language = 'isixhosa'
-          const theGreeting = await greeted.errorMessage(theName,language)
-        assert.equal("Please enter your name",theGreeting)
-
-    });
-
-    it("should display (please Enter Name and language) if the is no name passed and no languge selected",async function(){
-         let theName = ''
-         let theLanguage =''
-        const theGreeting = await greeted.errorMessage(theName,theLanguage)
-        assert.equal("Please enter your name and language",theGreeting)
-    });
-
     
-});
+    it("Should display nothing if the clear botton is pressed and the are > 1 names in the database", async function () {
+        
+        await greeted.getLanguage("Sdumo")
+        await greeted.clearNames()
+        assert.deepEqual( [] , await greeted.listofNames() )
+        
+    });
+    
+    it("Should display nothing if the clear botton is pressed and the are 4 names in the database", async function () {
 
+        await greeted.getLanguage("Sdumo")
+        await greeted.getLanguage("Young")
+        await greeted.getLanguage("TaSugar")
+
+        await greeted.clearNames()
+        assert.deepEqual( [] ,await greeted.listofNames() )
+
+    });
+     
+    
+    it("Should display nothing if the is no names in the database table", async function () {
+        
+        assert.equal(null, await greeted.userCounter())
+    });
+    
+    it("Should display name if name is the name in the database", async function () {
+        
+        await greeted.getLanguage("Sdumo");
+        assert.deepEqual([ { greeted_names: 'Sdumo' }]
+        , await greeted.listofNames())
+        
+    });
+
+    it("The names counter ", async function () {
+    
+        await greeted.getLanguage("Yanga");
+        await greeted.getLanguage("Aphiwe");
+        await greeted.getLanguage("Tso");
+        await greeted.getLanguage("Young");
+
+        assert.deepEqual( {
+            counter: 1,
+            greeted_names: 'Yanga'
+          }
+          , await greeted.userCounter('Yanga'))
+    });
+
+    after(async function () {
+        await db.manyOrNone('Truncate my_greet');
+    });
+})
 
