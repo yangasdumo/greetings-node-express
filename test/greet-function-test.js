@@ -11,7 +11,7 @@ describe("The Greetings factory function", function () {
         assert.deepEqual("Hello, Sdumo",greetmessage.message("Sdumo", "english"))
     });
 
-    it(' it should return (Hello Name) if name is passed and language is sesotho', function () {
+    it(' it should return (Dumela Name) if name is passed and language is sesotho', function () {
         let greetmessage= Greeting();
 
         assert.deepEqual("Dumela, Sdumo", greetmessage.message("Sdumo", "sesotho"))
