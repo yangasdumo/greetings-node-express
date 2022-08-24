@@ -20,31 +20,22 @@ describe("The Greeting Database tests", async function () {
     });
      
     
-    it("Should display nothing if the clear botton is pressed and the are > 1 names in the database", async function () {
+    it("Should be no names in the database when the reset button is pressed", async function () {
         
         await greeted.greet2("Sdumo")
         await greeted.clearNames()
-        assert.deepEqual( [] , await greeted.listofNames() )
+        assert.deepEqual( [] , await greeted.listofNames())
         
-    });
-    
-    it("Should display nothing if the clear botton is pressed and the are 4 names in the database", async function () {
-
-        await greeted.greet2("Sdumo")
-        await greeted.greet2("Young")
-        await greeted.greet2("TaSugar")
-
-        await greeted.clearNames()
-        assert.deepEqual( [] ,await greeted.listofNames() )
-
     });
      
-    it("Should display nothing if the is no names in the database table", async function () {
-        
-        assert.equal(null, await greeted.userCounter())
+    it("Should be able to count how many times a specific user has been greeted ", async function () {
+
+        await greeted.greet2("Yanga");
+        var personcounter = await greeted.userCounter("Yanga") ;
+        assert.equal(1, personcounter.counter)
     });
     
-    it("Should display name if name is the name in the database", async function () {
+    it("Should be able to display name if the name is already in the database", async function () {
         
         await greeted.greet2("Sdumo");
         assert.deepEqual([ { greeted_names: 'Sdumo' }]
@@ -52,7 +43,7 @@ describe("The Greeting Database tests", async function () {
         
     });
 
-    it("The names counter ", async function () {
+    it("should return the number of greeted names ", async function () {
     
         await greeted.greet2("Yanga");
         await greeted.greet2("Aphiwe");

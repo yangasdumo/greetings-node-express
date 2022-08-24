@@ -5,19 +5,19 @@ const Greeting = require('../greet-functions');
 
 describe("The Greetings factory function", function () {
 
-    it(' it should return (Hello Name) if name is passed and language is english', function () {
+    it(' it should return (Hello sdumo) if name is passed and language is english', function () {
         let greetmessage = Greeting();
 
         assert.deepEqual("Hello, Sdumo",greetmessage.message("Sdumo", "english"))
     });
 
-    it(' it should return (Dumela Name) if name is passed and language is sesotho', function () {
+    it(' it should return (Dumela sdumo) if name is passed and language is sesotho', function () {
         let greetmessage= Greeting();
 
         assert.deepEqual("Dumela, Sdumo", greetmessage.message("Sdumo", "sesotho"))
     });
 
-    it(' it should return (Mholo Name) if name is passed and language isixhosa', function () {
+    it(' it should return (Mholo sdumo) if name is passed and language isixhosa', function () {
         let greetmessage= Greeting();
 
         assert.deepEqual("Mholo, Sdumo",greetmessage.message("Sdumo", "isixhosa"))
