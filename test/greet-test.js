@@ -50,11 +50,8 @@ describe("The Greeting Database tests", async function () {
         await greeted.greet2("Tso");
         await greeted.greet2("Young");
 
-        assert.deepEqual( {
-            counter: 1,
-            greeted_names: 'Yanga'
-          }
-          , await greeted.userCounter('Yanga'))
+        assert.deepEqual( 4
+          , await greeted.countNames())
     });
 
     after(async function () {

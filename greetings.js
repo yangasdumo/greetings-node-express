@@ -21,14 +21,14 @@ module.exports = function Greet(db) {
 
   }
     
-  async function countNames(names) {
-    if (alphabets.test(names) == false) {
+  async function countNames() {
+    //  if (alphabets.test(names) == false) {
 
       let counted = await db.any('select * from my_greet');
       return counted.length
 
-    }
-    return;
+    // }
+    // return;
   }
   async function listofNames() {
     let greeted = await db.manyOrNone('select greeted_names from my_greet');
