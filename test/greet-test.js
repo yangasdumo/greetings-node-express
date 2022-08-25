@@ -16,11 +16,11 @@ const db = pgp(connectionString);
 describe("The Greeting Database tests", async function () {
 
     beforeEach(async function(){
-        await db.manyOrNone('delete from my_greet where id >=1')
+        await db.none('delete from my_greet where id >=1')
     });
      
     
-    it("Should be no names in the database when the reset button is pressed", async function () {
+    it("Should be no names in the database when the clear button is pressed", async function () {
         
         await greeted.greet2("Sdumo")
         await greeted.clearNames()
